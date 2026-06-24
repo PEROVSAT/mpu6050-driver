@@ -3,29 +3,39 @@
 #include "mpu6050.h"
 
 #include <errno.h>
+#include <string.h>
 
 #include <zephyr/device.h>
-
-/* FILL IN: include bus driver header, e.g. <zephyr/drivers/i2c.h> */
+#include <zephyr/drivers/i2c.h>
 
 int mpu6050_transfer(void *ctx, uint8_t reg, uint8_t *buf, size_t len, bool read)
 {
-	ARG_UNUSED(ctx);
-	ARG_UNUSED(reg);
-	ARG_UNUSED(buf);
-	ARG_UNUSED(len);
-	ARG_UNUSED(read);
+	const struct device *dev = ctx;
+	const struct mpu6050_config *config = dev->config;
 
-	/* FILL IN: perform bus read/write using config from dev->config */
+	if (read) {
+		return i2c_write_read_dt(&config->bus, &reg, 1, buf, len);
+	}
 
-	return -ENOTSUP;
+	uint8_t tx[1 + 32];
+
+	if (len > sizeof(tx) - 1) {
+		return -EINVAL;
+	}
+
+	tx[0] = reg;
+	memcpy(&tx[1], buf, len);
+
+	return i2c_write_dt(&config->bus, tx, len + 1);
 }
 
 int mpu6050_transfer_init(const struct device *dev)
 {
-	ARG_UNUSED(dev);
+	const struct mpu6050_config *config = dev->config;
 
-	/* FILL IN: verify bus is ready, e.g. i2c_is_ready_dt(&config->bus) */
+	if (!i2c_is_ready_dt(&config->bus)) {
+		return -ENODEV;
+	}
 
 	return 0;
 }

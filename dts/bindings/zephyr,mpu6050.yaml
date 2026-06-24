@@ -1,0 +1,33 @@
+description: MPU6050 device driver
+
+compatible: "zephyr,mpu6050"
+
+include: i2c-device.yaml
+
+on-bus: i2c
+
+properties:
+  accel-fs:
+    description: The Full Scale for acceleration, meaning the range it extends to
+    type: int
+    default: 2
+    enum:
+      - 2
+      - 4
+      - 8
+      - 16
+
+  gyro-fs:
+    description: The Full Scale for gyro, meaning the range it extends to
+    type: int
+    default: 250
+    enum:
+      - 250
+      - 500
+      - 1000
+      - 2000
+
+  smplrt-div:
+    description: Sample rate divider
+    type: int
+    default: 0

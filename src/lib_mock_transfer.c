@@ -33,6 +33,10 @@ int mpu6050_transfer_init(const struct device *dev)
 	ARG_UNUSED(dev);
 
 	memset(register_map, 0, sizeof(register_map));
+	register_map[0x75] = 0x68; /* WHO_AM_I: MPU6050 chip ID */
+	register_map[0x6B] = 0x40; /* PWR_MGMT1: sleep bit set (cleared by lib init) */
+	register_map[0x3F] = 0x40; /* ACCEL_ZOUT_H: high byte of 1g at ±2g FS */
+	register_map[0x40] = 0x00; /* ACCEL_ZOUT_L */
 
 	return 0;
 }
