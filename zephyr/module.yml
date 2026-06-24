@@ -1,0 +1,6 @@
+name: __MODULE_NAME__
+build:
+  cmake: .
+  kconfig: Kconfig
+  settings:
+    dts_root: .
