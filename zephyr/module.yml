@@ -1,4 +1,4 @@
-name: __MODULE_NAME__
+name: mpu6050-driver
 build:
   cmake: .
   kconfig: Kconfig

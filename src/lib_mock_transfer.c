@@ -1,18 +1,17 @@
 #include "transfer.h"
 
-#include "__DRIVER_SLUG__.h"
+#include "mpu6050.h"
 
 #include <errno.h>
 #include <string.h>
 
 #include <zephyr/device.h>
 
-#define __DRIVER_UPPER___REGISTER_MAP_SIZE 256
+#define MPU6050_REGISTER_MAP_SIZE 256
 
-static uint8_t register_map[__DRIVER_UPPER___REGISTER_MAP_SIZE];
+static uint8_t register_map[MPU6050_REGISTER_MAP_SIZE];
 
-
-int __DRIVER_SLUG___transfer(void *ctx, uint8_t reg, uint8_t *buf, size_t len, bool read)
+int mpu6050_transfer(void *ctx, uint8_t reg, uint8_t *buf, size_t len, bool read)
 {
 	ARG_UNUSED(ctx);
 
@@ -29,8 +28,7 @@ int __DRIVER_SLUG___transfer(void *ctx, uint8_t reg, uint8_t *buf, size_t len, b
 	return 0;
 }
 
-
-int __DRIVER_SLUG___transfer_init(const struct device *dev)
+int mpu6050_transfer_init(const struct device *dev)
 {
 	ARG_UNUSED(dev);
 

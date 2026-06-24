@@ -15,8 +15,7 @@
  *
  * @return 0 on success, negative errno on failure.
  */
-typedef int (*__DRIVER_SLUG___transfer_fn)(void *ctx, uint8_t reg, uint8_t *buf, size_t len,
-					   bool read);
+typedef int (*mpu6050_transfer_fn)(void *ctx, uint8_t reg, uint8_t *buf, size_t len, bool read);
 
 /**
  * Probe the device and apply initial configuration.
@@ -29,10 +28,10 @@ typedef int (*__DRIVER_SLUG___transfer_fn)(void *ctx, uint8_t reg, uint8_t *buf,
  *
  * @return 0 on success, negative errno on failure.
  */
-int __DRIVER_SLUG___lib_init(__DRIVER_SLUG___transfer_fn transfer, void *ctx);
+int mpu6050_lib_init(mpu6050_transfer_fn transfer, void *ctx);
 
 /* FILL IN: declare protocol functions, e.g.:
  *
- * int __DRIVER_SLUG___lib_read_reg(__DRIVER_SLUG___transfer_fn transfer, void *ctx,
+ * int mpu6050_lib_read_reg(mpu6050_transfer_fn transfer, void *ctx,
  *                                  uint8_t reg, uint8_t *val);
  */

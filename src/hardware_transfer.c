@@ -1,6 +1,6 @@
 #include "transfer.h"
 
-#include "__DRIVER_SLUG__.h"
+#include "mpu6050.h"
 
 #include <errno.h>
 
@@ -8,7 +8,7 @@
 
 /* FILL IN: include bus driver header, e.g. <zephyr/drivers/i2c.h> */
 
-int __DRIVER_SLUG___transfer(void *ctx, uint8_t reg, uint8_t *buf, size_t len, bool read)
+int mpu6050_transfer(void *ctx, uint8_t reg, uint8_t *buf, size_t len, bool read)
 {
 	ARG_UNUSED(ctx);
 	ARG_UNUSED(reg);
@@ -21,7 +21,7 @@ int __DRIVER_SLUG___transfer(void *ctx, uint8_t reg, uint8_t *buf, size_t len, b
 	return -ENOTSUP;
 }
 
-int __DRIVER_SLUG___transfer_init(const struct device *dev)
+int mpu6050_transfer_init(const struct device *dev)
 {
 	ARG_UNUSED(dev);
 
