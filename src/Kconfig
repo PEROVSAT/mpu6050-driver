@@ -1,0 +1,34 @@
+config __KCONFIG_SYM__
+	bool "__DRIVER_UPPER__ driver"
+	depends on __DT_HAS_ENABLED__
+	help
+	  Enable the __DRIVER_UPPER__ Zephyr driver module.
+
+if __KCONFIG_SYM__
+
+choice
+	prompt "__DRIVER_UPPER__ backend"
+	default __KCONFIG_SYM___BACKEND_PUBLIC_MOCK
+
+config __KCONFIG_SYM___BACKEND_HARDWARE
+	bool "Hardware (real device over bus)"
+	help
+	  Link lib/__DRIVER_SLUG__.c with src/hardware_transfer.c.
+	  Fill in that file when bringing the chip up.
+	  FILL IN: add "select I2C" (or SPI / SERIAL) on this symbol to match
+	  the part.
+
+config __KCONFIG_SYM___BACKEND_LIBRARY_MOCK
+	bool "Library mock (lib/ without hardware)"
+	help
+	  Link lib/__DRIVER_SLUG__.c with src/lib_mock_transfer.c.
+
+config __KCONFIG_SYM___BACKEND_PUBLIC_MOCK
+	bool "Public mock (hardcoded data, no library required)"
+	help
+	  Link mock/__DRIVER_SLUG__.c instead of lib/__DRIVER_SLUG__.c.
+	  Safe for CI and repos without NDA library access.
+
+endchoice
+
+endif

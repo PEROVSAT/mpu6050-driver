@@ -1,0 +1,10 @@
+/ {
+	aliases {
+		__DRIVER_SLUG__ = &__DRIVER_SLUG___0;
+	};
+
+	__DRIVER_SLUG___0: __DRIVER_SLUG__ {
+		compatible = "__COMPAT__";
+		status = "okay";
+	};
+};

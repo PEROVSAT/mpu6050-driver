@@ -1,0 +1,9 @@
+sample:
+  name: __DRIVER_UPPER__ REPL
+common:
+  tags: drivers
+  platform_allow:
+    - native_sim
+  build_only: true
+tests:
+  sample.__DRIVER_SLUG__.repl: {}

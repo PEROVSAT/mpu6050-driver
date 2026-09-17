@@ -1,0 +1,6 @@
+tests:
+  __MODULE_NAME__.unit:
+    tags:
+      - drivers
+    platform_allow:
+      - native_sim

@@ -1,0 +1,1 @@
+add_subdirectory_ifdef(CONFIG___KCONFIG_SYM__ src)
