@@ -4,18 +4,18 @@ zephyr_library_include_directories(${ZEPHYR_CURRENT_MODULE_DIR}/include)
 zephyr_include_directories(${ZEPHYR_CURRENT_MODULE_DIR}/include)
 
 # Packaging. Do not add device functions to these files.
-zephyr_library_sources(__DRIVER_SLUG__.c)
+zephyr_library_sources(mpu6050.c)
 
-zephyr_library_sources_ifdef(CONFIG___KCONFIG_SYM___BACKEND_HARDWARE hardware_transfer.c)
-zephyr_library_sources_ifdef(CONFIG___KCONFIG_SYM___BACKEND_LIBRARY_MOCK lib_mock_transfer.c)
+zephyr_library_sources_ifdef(CONFIG_PEROVSAT_MPU6050_BACKEND_HARDWARE hardware_transfer.c)
+zephyr_library_sources_ifdef(CONFIG_PEROVSAT_MPU6050_BACKEND_LIBRARY_MOCK lib_mock_transfer.c)
 
-# Device API: mock xor library, same symbols (__DRIVER_SLUG___init, …).
-zephyr_library_sources_ifdef(CONFIG___KCONFIG_SYM___BACKEND_PUBLIC_MOCK
-			     ${ZEPHYR_CURRENT_MODULE_DIR}/mock/__DRIVER_SLUG__.c)
+# Device API: mock xor library, same symbols (mpu6050_init, …).
+zephyr_library_sources_ifdef(CONFIG_PEROVSAT_MPU6050_BACKEND_PUBLIC_MOCK
+			     ${ZEPHYR_CURRENT_MODULE_DIR}/mock/mpu6050.c)
 
-set(__DRIVER_SLUG___LIB ${ZEPHYR_CURRENT_MODULE_DIR}/lib)
+set(mpu6050_LIB ${ZEPHYR_CURRENT_MODULE_DIR}/lib)
 
-if(CONFIG___KCONFIG_SYM___BACKEND_HARDWARE OR CONFIG___KCONFIG_SYM___BACKEND_LIBRARY_MOCK)
-	zephyr_library_include_directories(${__DRIVER_SLUG___LIB})
-	zephyr_library_sources(${__DRIVER_SLUG___LIB}/__DRIVER_SLUG__.c)
+if(CONFIG_PEROVSAT_MPU6050_BACKEND_HARDWARE OR CONFIG_PEROVSAT_MPU6050_BACKEND_LIBRARY_MOCK)
+	zephyr_library_include_directories(${mpu6050_LIB})
+	zephyr_library_sources(${mpu6050_LIB}/mpu6050.c)
 endif()

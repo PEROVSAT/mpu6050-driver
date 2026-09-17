@@ -1,5 +1,5 @@
 tests:
-  __MODULE_NAME__.unit:
+  mpu6050-driver.unit:
     tags:
       - drivers
     platform_allow:

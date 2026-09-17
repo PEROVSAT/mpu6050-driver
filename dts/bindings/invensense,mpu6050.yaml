@@ -1,0 +1,10 @@
+description: MPU6050 device driver
+
+compatible: "invensense,mpu6050"
+
+# FILL IN when bringing up hardware, e.g.:
+#   include: i2c-device.yaml
+#   on-bus: i2c
+
+properties:
+  # FILL IN: mirror fields of mpu6050_config_t

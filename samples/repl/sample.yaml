@@ -1,9 +1,9 @@
 sample:
-  name: __DRIVER_UPPER__ REPL
+  name: MPU6050 REPL
 common:
   tags: drivers
   platform_allow:
     - native_sim
   build_only: true
 tests:
-  sample.__DRIVER_SLUG__.repl: {}
+  sample.mpu6050.repl: {}

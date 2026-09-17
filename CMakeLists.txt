@@ -1,1 +1,1 @@
-add_subdirectory_ifdef(CONFIG___KCONFIG_SYM__ src)
+add_subdirectory_ifdef(CONFIG_PEROVSAT_MPU6050 src)
