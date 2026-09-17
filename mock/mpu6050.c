@@ -12,3 +12,10 @@ int mpu6050_init(mpu6050_t *dev, const mpu6050_config_t *cfg)
 
 	return 0;
 }
+
+int mpu6050_sample_fetch(mpu6050_t *dev)
+{
+	(void)dev;
+
+	return 0;
+}

@@ -7,4 +7,27 @@ compatible: "invensense,mpu6050"
 #   on-bus: i2c
 
 properties:
-  # FILL IN: mirror fields of mpu6050_config_t
+  accel-fs:
+    description: Accelerometer full-scale range in g
+    type: int
+    default: 2
+    enum:
+      - 2
+      - 4
+      - 8
+      - 16
+
+  gyro-fs:
+    description: Gyroscope full-scale range in degrees per second
+    type: int
+    default: 250
+    enum:
+      - 250
+      - 500
+      - 1000
+      - 2000
+
+  smplrt-div:
+    description: Sample rate divider
+    type: int
+    default: 0

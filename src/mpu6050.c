@@ -54,7 +54,9 @@ static int mpu6050_driver_init(const struct device *dev)
 	static const struct mpu6050_driver_config mpu6050_config_##inst = {                        \
 		.chip =                                                                            \
 			{                                                                          \
-				.unused = 0, /* FILL IN: .foo = DT_INST_PROP(inst, foo), */        \
+				.accel_fs = DT_INST_PROP(inst, accel_fs),                          \
+				.gyro_fs = DT_INST_PROP(inst, gyro_fs),                            \
+				.smplrt_div = DT_INST_PROP(inst, smplrt_div),                      \
 			},                                                                         \
 	};                                                                                         \
 	DEVICE_DT_INST_DEFINE(inst, mpu6050_driver_init, NULL, &mpu6050_data_##inst,               \
