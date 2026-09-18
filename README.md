@@ -44,14 +44,16 @@ mpu6050_t *dev = mpu6050_from_dev(DEVICE_DT_GET(DT_ALIAS(mpu6050)));
 From a west workspace that includes this module:
 
 ```bash
-west twister -T tests/unit -p native_sim
-west build -b native_sim mpu6050-driver/samples/repl
-west build -t run
+west twister -T tests/unit -p qemu_cortex_m3
+west build -b rpi_pico2/rp2350a/m33 mpu6050-driver/samples/repl
+west flash -r uf2
 ```
+
+The REPL sample defaults to Pico 2 and the UF2 runner. `west flash` with no `-r` uses OpenOCD (SWD probe). UF2 needs BOOTSEL: unplug USB, hold BOOTSEL, plug in, wait for the `RP2350` volume, then flash. After reset the shell is `/dev/cu.usbmodem*`. Close any serial session before the next BOOTSEL cycle.
 
 Unit tests compile `lib/` only. Uncomment the example in `tests/unit` and add
 `mpu6050_transfer` there when tests need a bus. They do not enable the
-Zephyr driver.
+Zephyr driver. Twister also allows `rpi_pico2/rp2350a/m33` for on-desk runs.
 
 ## App integration (perovsat-app)
 

@@ -5,6 +5,8 @@
 
 #include "mpu6050.h"
 
+#include <stddef.h>
+
 int mpu6050_init(mpu6050_t *dev, const mpu6050_config_t *cfg)
 {
 	(void)dev;
@@ -15,7 +17,17 @@ int mpu6050_init(mpu6050_t *dev, const mpu6050_config_t *cfg)
 
 int mpu6050_sample_fetch(mpu6050_t *dev)
 {
-	(void)dev;
+	if (dev == NULL) {
+		return 0;
+	}
+
+	dev->accel_x = 100;
+	dev->accel_y = 200;
+	dev->accel_z = 16384;
+	dev->gyro_x = 10;
+	dev->gyro_y = 20;
+	dev->gyro_z = 30;
+	dev->temp = 25;
 
 	return 0;
 }

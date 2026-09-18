@@ -3,7 +3,7 @@ sample:
 common:
   tags: drivers
   platform_allow:
-    - native_sim
+    - rpi_pico2/rp2350a/m33
   build_only: true
 tests:
   sample.mpu6050.repl: {}
