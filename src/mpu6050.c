@@ -57,9 +57,10 @@ static int mpu6050_driver_init(const struct device *dev)
 				.accel_fs = DT_INST_PROP(inst, accel_fs),                          \
 				.gyro_fs = DT_INST_PROP(inst, gyro_fs),                            \
 				.smplrt_div = DT_INST_PROP(inst, smplrt_div),                      \
-			},                                                                         \
-	};                                                                                         \
-	DEVICE_DT_INST_DEFINE(inst, mpu6050_driver_init, NULL, &mpu6050_data_##inst,               \
-			      &mpu6050_config_##inst, BOOT_STAGE, BOOT_PRIORITY, NULL);
+			}, 																		\
+			IF_ENABLED(CONFIG_PEROVSAT_MPU6050_BACKEND_HARDWARE,                    \
+			   (.bus = I2C_DT_SPEC_INST_GET(inst),))};  							\
+	DEVICE_DT_INST_DEFINE(inst, mpu6050_driver_init, NULL, &mpu6050_data_##inst, \
+		&mpu6050_config_##inst, BOOT_STAGE, BOOT_PRIORITY, NULL);					\
 
 DT_INST_FOREACH_STATUS_OKAY(MPU6050_INIT)

@@ -12,11 +12,9 @@ choice
 
 config PEROVSAT_MPU6050_BACKEND_HARDWARE
 	bool "Hardware (real device over bus)"
+	select I2C
 	help
 	  Link lib/mpu6050.c with src/hardware_transfer.c.
-	  Fill in that file when bringing the chip up.
-	  FILL IN: add "select I2C" (or SPI / SERIAL) on this symbol to match
-	  the part.
 
 config PEROVSAT_MPU6050_BACKEND_LIBRARY_MOCK
 	bool "Library mock (lib/ without hardware)"

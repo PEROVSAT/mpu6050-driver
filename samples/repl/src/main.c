@@ -18,6 +18,9 @@ static mpu6050_t *sh_dev(const struct shell *sh)
 static int cmd_fetch(const struct shell *sh, size_t argc, char **argv)
 {
 	mpu6050_t *dev = sh_dev(sh);
+	float accel_scale;
+	float gyro_scale;
+	float temp_c;
 	int ret;
 
 	ARG_UNUSED(argc);
@@ -33,9 +36,19 @@ static int cmd_fetch(const struct shell *sh, size_t argc, char **argv)
 		return ret;
 	}
 
-	shell_print(sh, "accel %d %d %d", dev->accel_x, dev->accel_y, dev->accel_z);
-	shell_print(sh, "gyro %d %d %d", dev->gyro_x, dev->gyro_y, dev->gyro_z);
-	shell_print(sh, "temp %d", dev->temp);
+	accel_scale = -1.0f / (float)(1U << dev->accel_sensitivity_shift);
+	gyro_scale = 10.0f / (float)dev->gyro_sensitivity_x10;
+	if (dev->device_type == MPU6050_DEVICE_TYPE_MPU6500) {
+		temp_c = (float)dev->temp / 333.87f + 21.0f;
+	} else {
+		temp_c = (float)dev->temp / 340.0f + 36.53f;
+	}
+
+	shell_print(sh, "accel [g] %.3f %.3f %.3f", dev->accel_x * accel_scale,
+		    dev->accel_y * accel_scale, dev->accel_z * accel_scale);
+	shell_print(sh, "gyro [deg/s] %.1f %.1f %.1f", dev->gyro_x * gyro_scale,
+		    dev->gyro_y * gyro_scale, dev->gyro_z * gyro_scale);
+	shell_print(sh, "temp [deg C] %.2f", temp_c);
 	return 0;
 }
 
