@@ -13,14 +13,15 @@
 	#include <zephyr/drivers/i2c.h>
 #endif
 
-
 #include <mpu6050.h>
 
 struct mpu6050_driver_config {
 	mpu6050_config_t chip;
 
 	/* FILL IN when bringing up hardware, e.g. struct i2c_dt_spec bus; */
+#if defined(CONFIG_PEROVSAT_MPU6050_BACKEND_HARDWARE)
 	struct i2c_dt_spec bus;
+#endif
 };
 
 struct mpu6050_driver_data {
