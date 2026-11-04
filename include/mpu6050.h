@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdint.h>
-
+#include "flight/imu/imu.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -51,7 +51,7 @@ typedef struct mpu6050 {
 } mpu6050_t;
 
 int mpu6050_init(mpu6050_t *dev, const mpu6050_config_t *cfg);
-int mpu6050_sample_fetch(mpu6050_t *dev);
+int mpu6050_sample_fetch(mpu6050_t *dev, psp_imu_reading *reading);
 
 /* App glue: Zephyr `struct device` → this object. Implemented in src/. */
 struct device;

@@ -6,4 +6,5 @@ target_sources(app PRIVATE src/main.c)
 target_sources(app PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../lib/mpu6050.c)
 target_include_directories(app PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}/../../include
-  ${CMAKE_CURRENT_SOURCE_DIR}/../../lib)
+  ${CMAKE_CURRENT_SOURCE_DIR}/../../lib
+  ${CMAKE_CURRENT_SOURCE_DIR}/../../../perovsat-protocol)
